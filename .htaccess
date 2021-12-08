@@ -1,0 +1,12 @@
+<ifModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+</ifModule>
+
+#Block_Access_Url
+Options -Indexes
+
+ErrorDocument 404 /sipenjalu/error/error.php
+ErrorDocument 403 /sipenjalu/error/error.php

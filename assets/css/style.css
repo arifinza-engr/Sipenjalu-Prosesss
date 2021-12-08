@@ -1,0 +1,411 @@
+/*github ==> arifinza-engr */
+
+#wrapper {
+  width: 100%;
+  background: #202020;
+}
+
+#page-wrapper {
+  padding: 15px 15px;
+  min-height: 600px;
+  background: #f3f3f3;
+}
+#page-inner {
+  width: 100%;
+  margin: 10px 20px 10px 0px;
+  background-color: #fff !important;
+  padding: 10px;
+  min-height: 1200px;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+.no-boder {
+  border: 1px solid #f3f3f3;
+}
+h2 {
+  color: rgb(0, 17, 255);
+  text-shadow: #000000 1px 1px 2px;
+}
+h4 {
+  padding-top: 10px;
+}
+.square-btn-adjust {
+  box-shadow: #000 0px 0px 5px;
+}
+p {
+  font-size: 16px;
+  line-height: 25px;
+  padding-top: 20px;
+}
+
+.namalevel {
+  color: rgb(255, 255, 255);
+  padding: 15px 50px 5px 50px;
+  text-shadow: rgb(0, 0, 0) 1px 2px 2px;
+  margin-right: 5px;
+  float: left;
+  font-size: 18px;
+}
+/*==============================================
+   DASHBOARD STYLES    
+    =============================================*/
+.panel-back {
+  background-color: #f8f8f8;
+}
+.noti-box {
+  min-height: 100px;
+  padding: 20px;
+}
+
+.noti-box .icon-box {
+  display: block;
+  float: left;
+  margin: 0px 15px 10px 0px;
+  width: 70px;
+  height: 70px;
+  line-height: 75px;
+  /* vertical-align: middle; */
+  text-align: center;
+  font-size: 40px;
+}
+.text-box p {
+  margin: 0 0 3px;
+}
+.main-text {
+  font-size: 25px;
+  font-weight: 600;
+}
+.set-icon {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+}
+.bg-color-green {
+  background-color: #00d370;
+  color: #fff;
+}
+.bg-color-blue {
+  background-color: #0066ff;
+  color: #fff;
+}
+.bg-color-red {
+  background-color: #ff0000;
+  color: #fff;
+}
+.bg-color-brown {
+  background-color: #c24e00;
+  color: #fff;
+}
+.bg-color-custom {
+  background-color: #a007e7;
+  color: #fff;
+}
+
+/* .icon-box-right {
+  display: block;
+  float: right;
+  margin: 0 15px 10px 0;
+  width: 70px;
+  height: 70px;
+  line-height: 75px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 40px;
+} */
+
+.main-temp-back {
+  background: #8702a8;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: center;
+}
+.main-temp-back .text-temp {
+  font-size: 40px;
+}
+.back-dash {
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  background-color: #2ea7eb;
+  color: #fff;
+}
+.back-dash p {
+  padding-top: 16px;
+  font-size: 13px;
+  color: #fff;
+  line-height: 25px;
+  text-align: justify;
+}
+.back-footer-green {
+  background-color: #009b50;
+  border-top: 0px solid #fff;
+}
+.back-footer-red {
+  background-color: #14bafc;
+  border-top: 0px solid #fff;
+}
+.color-bottom-txt {
+  color: #000;
+  font-size: 16px;
+  line-height: 30px;
+}
+/*CHAT PANEL*/
+.chat-panel .panel-body {
+  height: 450px;
+  overflow-y: scroll;
+}
+.chat-box {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chat-box li {
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px dotted #808080;
+}
+.chat-box li.left .chat-body {
+  margin-left: 90px;
+}
+.chat-box li .chat-body p {
+  margin: 0;
+  color: #8d8888;
+}
+.chat-img > img {
+  margin-left: 20px;
+}
+
+/*==============================================
+    MENU STYLES    
+    =============================================*/
+
+.user-image {
+  margin: 25px auto;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  max-height: 170px;
+  max-width: 170px;
+}
+
+.login {
+  background-image: linear-gradient(to left, #1471fc, #14bafc, #52caf9);
+}
+
+.login-shadow {
+  box-shadow: #0a0a0a 0px 0px 10px;
+}
+
+.navbar-cls-top .navbar-brand {
+  color: #fff;
+  background: #0077ff;
+  width: 260px;
+  text-shadow: rgb(0, 0, 0) -3px -3px 7px;
+  text-align: center;
+  height: 60px;
+  border-radius: 5px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+.active-menu {
+  background-color: #14bafc !important;
+}
+
+.arrow {
+  float: right;
+}
+
+.fa.arrow:before {
+  content: "\f104";
+}
+
+.active > a > .fa.arrow:before {
+  content: "\f107";
+}
+
+.nav-second-level li,
+.nav-third-level li {
+  border-bottom: none !important;
+}
+
+.nav-second-level li a {
+  padding-left: 37px;
+}
+
+.nav-third-level li a {
+  padding-left: 55px;
+}
+.sidebar-collapse,
+.sidebar-collapse .nav {
+  background: none;
+}
+.sidebar-collapse .nav {
+  padding: 0;
+}
+.sidebar-collapse .nav > li > a {
+  color: #fff;
+  background: #202020;
+  text-shadow: none;
+}
+.sidebar-collapse > .nav > li > a {
+  padding: 15px 10px;
+}
+.sidebar-collapse > .nav > li {
+  border-bottom: 1px solid rgba(107, 108, 109, 0.19);
+}
+.sidebar-collapse .nav > li > a:hover,
+.sidebar-collapse .nav > li > a:focus {
+  background: #0a0a0a;
+  outline: 0;
+}
+
+.nav-second-level > li > a:before,
+.nav-third-level > li > a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 20px;
+  width: 15px;
+  height: 1px;
+  background: #14bafc;
+  top: 20px;
+}
+.nav-second-level > li > a:after,
+.nav-third-level > li > a:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 20px;
+  width: 1px;
+  height: 100%;
+  background: #14bafc;
+  top: 0px;
+  z-index: 10;
+}
+.nav-second-level > li:last-child > a:after,
+.nav-third-level > li:last-child > a:after {
+  height: 50%;
+}
+.nav-third-level > li > a:after,
+.nav-third-level > li > a:before {
+  left: 40px;
+}
+.navbar-side {
+  border: none;
+  background-color: #202020;
+}
+.navbar-cls-top {
+  background-image: linear-gradient(to right, #1471fc, #14bafc, #52caf9);
+  border-bottom: none;
+}
+.navbar-cls-top .navbar-brand:hover {
+  background: #0079c9;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.navbar-default {
+  border: 0px solid black;
+}
+.navbar-header {
+  background: #202020;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #14bafc;
+}
+.navbar-default .navbar-toggle {
+  border-color: #fff;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.nav > li > a > i {
+  margin-right: 10px;
+}
+
+/*==============================================
+    UI ELEMENTS STYLES     
+    =============================================*/
+.btn-circle {
+  width: 50px;
+  height: 50px;
+  padding: 6px 0;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.428571429;
+}
+
+/*==============================================
+    MEDIA QUERIES     
+    =============================================*/
+
+@media (min-width: 768px) {
+  #page-wrapper {
+    margin: 0 0 0 260px;
+    padding: 15px 30px;
+    min-height: 1200px;
+  }
+
+  .navbar-side {
+    z-index: 1;
+    position: absolute;
+    width: 260px;
+  }
+
+  .navbar {
+    border-radius: 0px;
+  }
+}
+
+@media (min-width: 454px) {
+  .square-btn-adjust {
+    margin-top: 13px;
+    margin-right: 10px;
+    float: right;
+  }
+}
+
+@media (max-width: 454px) {
+  .square-btn-adjust {
+    margin-top: -40px;
+    margin-right: 10px;
+  }
+  .namalevel {
+    color: rgb(255, 255, 255);
+    padding: 8px 50px 5px 50px;
+    text-shadow: rgb(0, 0, 0) 1px 2px 2px;
+    margin-right: 5px;
+    float: left;
+    font-size: 18px;
+  }
+  .navbar-cls-top {
+    background-image: linear-gradient(to right, #1471fc, #14bafc, #52caf9);
+    height: 120px;
+    border-radius: 0px;
+  }
+
+  .navbar-cls-top .navbar-brand {
+    border-radius: 0px;
+  }
+
+  footer {
+    margin-top: 110px;
+  }
+}
