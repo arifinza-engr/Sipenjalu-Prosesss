@@ -1,8 +1,11 @@
 ﻿<?php
 
+session_set_cookie_params(0, '/', '', false, true);
 session_start();
-if (isset($_SESSION['ses_nama']) == "") {
+
+if (empty($_SESSION['ses_nama'])) {
   header("location: login");
+  exit();
 } else {
   $data_id = $_SESSION["ses_id"];
   $data_nama = $_SESSION["ses_nama"];
@@ -13,6 +16,7 @@ if (isset($_SESSION['ses_nama']) == "") {
 include "inc/koneksi.php";
 
 ?>
+
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,9 +37,12 @@ include "inc/koneksi.php";
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkyPyVxHBaWGGsJgiQDe0ttKfhE1zzDZ0&callback=initMap" async defer></script>
   <link rel="stylesheet" href="dist/css/select2.min.css" />
-
+  <!-- Bootstrap 3 JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <style>
@@ -65,16 +72,9 @@ include "inc/koneksi.php";
       </div>
 
       <!-- kondisi tombol logout -->
-      <?php if ($data_level == "Administrator") { ?>
+      <?php if ($data_level == "Administrator" || $data_level == "Petugas") { ?>
         <div style="float : right;">
-          <a href="logout" onclick="return confirm('Apakah anda yakin ingin keluar dari aplikasi ini ?')" class="btn btn-danger square-btn-adjust">LOGOUT</a>
-        </div>
-      <?php
-      }
-      ?>
-      <?php if ($data_level == "Petugas") { ?>
-        <div style="float : right;">
-          <a href="logout" onclick="return confirm('Apakah anda yakin ingin keluar dari aplikasi ini ?')" class="btn btn-danger square-btn-adjust">LOGOUT</a>
+          <button onclick="confirmLogout()" class="btn btn-danger square-btn-adjust">LOGOUT</button>
         </div>
       <?php
       }
@@ -121,6 +121,9 @@ include "inc/koneksi.php";
               </a>
               <ul class="nav nav-second-level">
                 <li>
+                  <a href="?page=aduan_admin_semua">Semua Aduan</a>
+                </li>
+                <li>
                   <a href="?page=aduan_admin">Menunggu</a>
                 </li>
                 <li>
@@ -132,10 +135,10 @@ include "inc/koneksi.php";
               </ul>
             </li>
 
-            <li>
-              <a href="?page=telegram">
+            <!-- <li>
+              <a href="?page=laporan">
                 <i class="fa fa-comments-o fa-2x"></i> Telegram</a>
-            </li>
+            </li> -->
 
             <li>
               <a href="?page=user_data">
@@ -209,146 +212,102 @@ include "inc/koneksi.php";
             <!-- Menjadikan page web dinamis, 
                 dengan menjadikan page lain yang dipanggil sebagai sebuah konten dari index.php-->
             <?php
-            if (isset($_GET['page'])) {
-              $hal = $_GET['page'];
 
-              switch ($hal) {
-                case 'admin-def':
-                  include "default/admin.php";
-                  break;
-                case 'petugas-def':
-                  include "default/tugas.php";
-                  break;
-                case 'pengadu':
-                  include "default/pengadu.php";
-                  break;
+            // Define an associative array to map page requests to file paths.
+            $pageMap = [
+              'admin-def' => 'default/admin.php',
+              'petugas-def' => 'default/tugas.php',
+              'pengadu' => 'default/pengadu.php',
+              'user_data' => 'admin/pengguna/pengguna_tampil.php',
+              'pengguna_tambah' => 'admin/pengguna/pengguna_tambah.php',
+              'pengguna_ubah' => 'admin/pengguna/pengguna_ubah.php',
+              'pedu_ubah' => 'admin/pengguna/pedu_ubah.php',
+              'pengguna_hapus' => 'admin/pengguna/pengguna_hapus.php',
+              'jenis_view' => 'admin/jenis/jenis_tampil.php',
+              'jenis_tambah' => 'admin/jenis/jenis_tambah.php',
+              'jenis_ubah' => 'admin/jenis/jenis_ubah.php',
+              'jenis_hapus' => 'admin/jenis/jenis_hapus.php',
+              'pengadu_view' => 'admin/pengadu/pengadu_tampil.php',
+              'pengadu_tambah' => 'admin/pengadu/pengadu_tambah.php',
+              'pengadu_ubah' => 'admin/pengadu/pengadu_ubah.php',
+              'pengadu_hapus' => 'admin/pengadu/pengadu_hapus.php',
+              'aduan_admin' => 'admin/aduan/adu_tampil.php',
+              'aduan_admin_semua' => 'admin/aduan/adu_tampil_semua.php',
+              'aduan_admin_tanggap' => 'admin/aduan/adu_tanggap.php',
+              'aduan_admin_selesai' => 'admin/aduan/adu_selesai.php',
+              'aduan_kelola' => 'admin/aduan/adu_ubah.php',
+              'telegram' => 'admin/telegram/telegram.php',
+              'laporan' => 'admin/laporan/laporan.php',
+              'logout' => 'logout.php',
+              'aduan_view' => 'pengadu/aduan/adu_tampil.php',
+              'aduan_tambah' => 'pengadu/aduan/adu_tambah.php',
+              'aduan_ubah' => 'pengadu/aduan/adu_ubah.php',
+              'aduan_hapus' => 'pengadu/aduan/adu_hapus.php'
+            ];
 
-                  //User
-                case 'user_data':
-                  include "admin/pengguna/pengguna_tampil.php";
-                  break;
-                case 'pengguna_tambah':
-                  include "admin/pengguna/pengguna_tambah.php";
-                  break;
-                case 'pengguna_ubah':
-                  include "admin/pengguna/pengguna_ubah.php";
-                  break;
-                case 'pedu_ubah':
-                  include "admin/pengguna/pedu_ubah.php";
-                  break;
-                case 'pengguna_hapus':
-                  include "admin/pengguna/pengguna_hapus.php";
-                  break;
+            // Define an array for default pages based on user level
+            $defaultPages = [
+              'Administrator' => 'default/admin.php',
+              'Petugas' => 'default/tugas.php',
+              'Pengadu' => 'default/pengadu.php'
+            ];
 
-                  //jenis
-                case 'jenis_view':
-                  include "admin/jenis/jenis_tampil.php";
-                  break;
-                case 'jenis_tambah':
-                  include "admin/jenis/jenis_tambah.php";
-                  break;
-                case 'jenis_ubah':
-                  include "admin/jenis/jenis_ubah.php";
-                  break;
-                case 'jenis_hapus':
-                  include "admin/jenis/jenis_hapus.php";
-                  break;
+            // Get the requested page from the URL query parameter.
+            $hal = $_GET['page'] ?? null;
 
-                  //pengadu
-                case 'pengadu_view':
-                  include "admin/pengadu/pengadu_tampil.php";
-                  break;
-                case 'pengadu_tambah':
-                  include "admin/pengadu/pengadu_tambah.php";
-                  break;
-                case 'pengadu_ubah':
-                  include "admin/pengadu/pengadu_ubah.php";
-                  break;
-                case 'pengadu_hapus':
-                  include "admin/pengadu/pengadu_hapus.php";
-                  break;
-
-                  //aduan admin
-                case 'aduan_admin':
-                  include "admin/aduan/adu_tampil.php";
-                  break;
-                case 'aduan_admin_tanggap':
-                  include "admin/aduan/adu_tanggap.php";
-                  break;
-                case 'aduan_admin_selesai':
-                  include "admin/aduan/adu_selesai.php";
-                  break;
-                case 'aduan_kelola':
-                  include "admin/aduan/adu_ubah.php";
-                  break;
-
-                  //telegram
-                case 'telegram':
-                  include "admin/telegram/telegram.php";
-                  break;
-
-                case 'laporan':
-                  include "admin/laporan/laporan.php";
-                  break;
-                  //logout
-                case 'logout':
-                  include "logout.php";
-                  break;
-
-                  //aduan
-                case 'aduan_view':
-                  include "pengadu/aduan/adu_tampil.php";
-                  break;
-                case 'aduan_tambah':
-                  include "pengadu/aduan/adu_tambah.php";
-                  break;
-                case 'aduan_ubah':
-                  include "pengadu/aduan/adu_ubah.php";
-                  break;
-                case 'aduan_hapus':
-                  include "pengadu/aduan/adu_hapus.php";
-                  break;
-
-
-                  //default
-                default:
-                  echo "<center><h1> ERROR !</h1></center>";
-                  break;
-              }
+            // Include the appropriate file based on the request, or go to the default page based on user level.
+            if (isset($pageMap[$hal])) {
+              include $pageMap[$hal];
+            } elseif (isset($defaultPages[$data_level])) {
+              include $defaultPages[$data_level];
             } else {
-              if ($data_level == "Administrator") {
-                include "default/admin.php";
-              } elseif ($data_level == "Petugas") {
-                include "default/tugas.php";
-              } elseif ($data_level == "Pengadu") {
-                include "default/pengadu.php";
-              }
+              echo "<center><h1> ERROR !</h1></center>";
             }
+
             ?>
+
           </div>
         </div>
 
-
+        <script>
+          function confirmLogout() {
+            Swal.fire({
+              title: 'Apakah Anda Yakin?',
+              text: "Apakah anda yakin ingin keluar dari aplikasi ini?",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ya, Keluar',
+              cancelButtonText: 'Batal'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Redirect ke halaman logout
+                window.location.href = "logout";
+              }
+            })
+          }
+        </script>
 
         <!-- /. WRAPPER  -->
         <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
         <!-- JQUERY SCRIPTS -->
-        <script src="assets/js/jquery-1.10.2.js"></script>
+        <script src='assets/js/jquery-1.10.2.js' defer></script>
         <!-- BOOTSTRAP SCRIPTS -->
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src='assets/js/bootstrap.min.js' defer></script>
         <!-- METISMENU SCRIPTS -->
-        <script src="assets/js/jquery.metisMenu.js"></script>
+        <script src='assets/js/jquery.metisMenu.js' defer></script>
         <!-- CUSTOM SCRIPTS -->
 
-        <script src="assets/js/dataTables/jquery.dataTables.js"></script>
-        <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+        <script src='assets/js/dataTables/jquery.dataTables.js' defer></script>
+        <script src='assets/js/dataTables/dataTables.bootstrap.js' defer></script>
         <script>
           $(document).ready(function() {
             $('#dataTables-example').dataTable();
           });
         </script>
 
-        <script src="dist/js/select2.min.js"></script>
+        <script src='dist/js/select2.full.min.js' defer></script>
         <script>
           $(document).ready(function() {
             $("#no_pdd").select2({
@@ -360,8 +319,9 @@ include "inc/koneksi.php";
           });
         </script>
         <!-- CUSTOM SCRIPTS -->
-        <script src="assets/js/custom.js"></script>
-
+        <script src='assets/js/custom.js' defer></script>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@9' defer></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 </body>
 

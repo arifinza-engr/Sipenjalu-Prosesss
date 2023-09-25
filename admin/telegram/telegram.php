@@ -24,7 +24,7 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH);
 					</div>
 
 					<div class="form-group">
-						<label>Id Chat</label>
+						<label>Whatsapp Admin</label>
 						<input class="form-control" name="id_chat" value="<?php echo $data_cek['id_chat']; ?>" />
 					</div>
 					<div>

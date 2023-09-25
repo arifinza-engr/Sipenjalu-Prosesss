@@ -46,21 +46,16 @@ include "inc/koneksi.php";
                 <b>SI PENJALU</b>
               </h2>
             </center>
+            <br>
+            <br>
             <CENTER>Sistem Informasi Pengaduan Penerangan Jalan Umum</CENTER>
             <form action="" method="POST" enctype="multipart/form-data">
               <br />
-              <div class="form-group input-group">
-                <span class="input-group-addon">
-                  <i class="fa fa-tag"></i>
-                </span>
+
                 <input type="hidden" class="form-control" value="pengadu" name="username" id="username" />
-              </div>
-              <div class="form-group input-group">
-                <span class="input-group-addon">
-                  <i class="fa fa-lock"></i>
-                </span>
+
+
                 <input type="hidden" class="form-control" value="123" name="password" id="password" />
-              </div>
 
               <button type="submit" class="btn btn-primary form-control" name="btnLogin" title="Masuk Sistem" id="clicker" />MULAI PENGADUAN</button>
               <br>
